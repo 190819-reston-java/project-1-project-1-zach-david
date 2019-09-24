@@ -1,4 +1,20 @@
+.back {
+    background-color: rgb(9, 143, 221) ;
+    height: 1000px;
+    
+}
+.gap {
+    padding: 100px;
+}
+
+.navlinks {
+   padding-left: 10px; 
+}
+
 .userform {
+    margin: auto;
     width: 500px;
     padding: 50px;
+    background-color: white;
 }
+

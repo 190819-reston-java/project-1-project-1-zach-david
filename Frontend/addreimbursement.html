@@ -21,7 +21,7 @@
         <div class="gap"></div>
         <div class= "registerform">
             <h1>Expense</h1>
-            <form id="expenseform" method="GET" action="www.google.com">
+            <form id="expenseform" method="GET" action="menu.html">
                 <div class="form-group">
                     <label for="requestdate">Request Date</label>
                     <input type="date" class="form-control" id="requestdate" 
@@ -30,10 +30,6 @@
                 <div class="form-group">
                   <label for="amount">Expense Amount</label>
                   <input type="number" class="form-control" id="amount" placeholder="Enter Expense Amount">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <div class="form-group">
                     <label for="expensetype">Expense Type:</label>
@@ -49,11 +45,12 @@
                     <textarea id="expensedescription:" form="expenseform" class="form-control"></textarea>
                 </div>
 
-                <button class="btn-info btn-lg btn-block" 
+                <button type="submit" class="btn-info btn-lg btn-block" 
                 onclick="window.location.href = 'menu.html';">Add Expense</button>
-                
+                <button class="btn-info btn-lg btn-block" 
+                onclick="window.location.href = 'menu.html';">Cancel</button>                
               </form>
-              
+
     
         </div>
     </div>

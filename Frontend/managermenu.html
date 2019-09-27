@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="main.css" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
     integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <title>Employee Reimbursement Menu</title>
+    <title>Manager Reimbursement Menu</title>
 </head>
 <body>
     <nav class="navbar nav-pills navbar-expand-sm">
@@ -15,8 +15,8 @@
         <a class="nav-link" href="index.html">Home</a>
         <a class="nav-link" href="login.html">Login</a>
         <a class="nav-link" href="register.html">Register</></a>
-        <a class="nav-link active" href="menu.html">Employee Menu</></a>
-        <a class="nav-link" href="managermenu.html">Manager Menu</></a>
+        <a class="nav-link" href="menu.html">Employee Menu</></a>
+        <a class="nav-link active" href="managermenu.html">Manager Menu</></a>
     </nav>
     <div class="back">
         <div class="gap"></div>
@@ -30,8 +30,10 @@
 
                 </tbody>
             </table>
-            <button class="btn-info btn-lg btn-block">View Reimbursements</button>
-            <button class="btn-info btn-lg btn-block">Edit Reimbursement</button>
+            <button class="btn-info btn-lg btn-block" 
+            onclick="window.location.href = 'addreimbursement.html';">View Reimbursements</button>
+            <button class="btn-info btn-lg btn-block"
+            onclick="window.location.href = 'reviewreimbursement.html';">Review Reimbursement</button>
             <button class="btn-info btn-lg btn-block" 
             onclick="window.location.href = 'addreimbursement.html';">Create New Reimbursement</button>
         </div>

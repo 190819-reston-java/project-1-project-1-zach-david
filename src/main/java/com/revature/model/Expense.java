@@ -7,11 +7,24 @@ public class Expense {
 	private double amount;
 	private String description;
 	private int employeeId;
-	private String type;
-	private String status;
+	private int type;
+	private int status;
 	private int managerId;
 	
 	
+	
+	public Expense(int expenseId, String requestDate, double amount, String description, int employeeId, int type,
+			int status, int managerId) {
+		super();
+		this.expenseId = expenseId;
+		this.requestDate = requestDate;
+		this.amount = amount;
+		this.description = description;
+		this.employeeId = employeeId;
+		this.type = type;
+		this.status = status;
+		this.managerId = managerId;
+	}
 	public int getExpenseId() {
 		return expenseId;
 	}
@@ -42,16 +55,16 @@ public class Expense {
 	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
 	}
-	public String getType() {
+	public int getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	public int getManagerId() {

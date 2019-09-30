@@ -120,7 +120,6 @@ public class EmployeeDaoJdbc implements EmployeeDao {
 
 	public boolean createEmployee(Employee emp) {
 		Connection conn =  null;
-		ResultSet resultSet = null;
 		PreparedStatement stmt = null;
 		String query = "INSERT INTO employee VALUES (DEFAULT, ?, ?, ?, ?, ?, ?;";
 		
@@ -138,12 +137,14 @@ public class EmployeeDaoJdbc implements EmployeeDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		} finally {
+			StreamCloser.close(stmt);
+			StreamCloser.close(conn);
 		}
 	}
 
 	public boolean updateEmployee(Employee emp) {
 		Connection conn =  null;
-		ResultSet resultSet = null;
 		PreparedStatement stmt = null;
 		String query = "UPDATE employee SET (firstname=?, lastname=?, email=?, username=?, password=?, manager=? WHERE employeeid=?;)";
 		
@@ -164,7 +165,6 @@ public class EmployeeDaoJdbc implements EmployeeDao {
 			e.printStackTrace();
 			return false;
 		} finally {
-			StreamCloser.close(resultSet);
 			StreamCloser.close(stmt);
 			StreamCloser.close(conn);
 		}

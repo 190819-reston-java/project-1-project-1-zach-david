@@ -35,6 +35,9 @@ vr.addEventListener("click", (event) => {
         <td>
         status
         </td>
+        <td>
+        manager name
+        </td>
    </tr> 
 
     `;

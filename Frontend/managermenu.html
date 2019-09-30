@@ -22,21 +22,33 @@
         <div class="gap"></div>
         <div class= "registerform">
             <h1>Reimbusements</h1>
-            <table>
-                <thead>
+            <div class="table-responsive">
+                <table id="managerreimbursement" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Expense ID</th>
+                            <th scope="col">Submitted by</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Reviewed By</th>
+                        </th>
 
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody id="mreimbursementlist">
 
-                </tbody>
+                    </tbody>
             </table>
-            <button class="btn-info btn-lg btn-block">View Reimbursements</button>
+            </div>
+            <button id="managerview" class="btn-info btn-lg btn-block">Show Reimbursements</button>
             <button class="btn-info btn-lg btn-block"
             onclick="window.location.href = 'reviewreimbursement.html';">Review Reimbursement</button>
             <button class="btn-info btn-lg btn-block" 
             onclick="window.location.href = 'addreimbursement.html';">Create New Reimbursement</button>
         </div>
     </div>
-
+    <script src="managermenu.js"></script>
 </body>
 </html>

@@ -22,20 +22,29 @@
         <div class="gap"></div>
         <div class= "registerform">
             <h1>Reimbusements</h1>
-            <table>
+            <table id="employeereimbursement" class="table">
                 <thead>
+                    <tr>
+                        <th scope="col">Expense ID</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Reviewed By</th>
+                    </tr>
 
                 </thead>
-                <tbody>
+                <tbody id="ereimbursementlist">
 
                 </tbody>
             </table>
-            <button class="btn-info btn-lg btn-block">View Reimbursements</button>
+            <button id="viewreimbursement" class="btn-info btn-lg btn-block">Show All Reimbursements</button>
             <button class="btn-info btn-lg btn-block">Edit Reimbursement</button>
             <button class="btn-info btn-lg btn-block" 
             onclick="window.location.href = 'addreimbursement.html';">Create New Reimbursement</button>
         </div>
     </div>
-
+    <script src="menu.js"></script>
 </body>
 </html>

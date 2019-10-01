@@ -1,7 +1,7 @@
 'use strict'
 
 let login = getElementById("login");
-let EMPLOYEE_URL = /s/menu.html;
+let EMPLOYEE_URL = menu.html;
 
 
 login.addEventListener("submit", (event) => {
@@ -10,7 +10,7 @@ login.addEventListener("submit", (event) => {
     let username = getElementById("usernameInput").value;
     let password = getElementById("passwordInput").value;
 
-    fetch(EMPLOYEE_URL, {method: "GET"})
+    fetch(EMPLOYEE_URL, {method: "POST"})
         .then((response) => {
             return response.json();
         })

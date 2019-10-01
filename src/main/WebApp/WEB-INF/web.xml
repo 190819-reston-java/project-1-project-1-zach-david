@@ -32,7 +32,7 @@
 
 	<servlet-mapping>
 		<servlet-name>FC</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/s/*</url-pattern>
 	</servlet-mapping>
 
 	

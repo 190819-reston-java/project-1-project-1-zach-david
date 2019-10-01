@@ -1,4 +1,4 @@
-package com.reavature.servlets;
+package com.revature.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +24,7 @@ public class FrontController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String[] splitUri = req.getRequestURI().split("/");
-		String[] tokens = Arrays.copyOfRange(splitUri, 2, splitUri.length);
+		String[] tokens = Arrays.copyOfRange(splitUri, 3, splitUri.length);
 		
 		if (tokens.length == 0) {
 			resp.sendError(400, "Usage: /expenses or /employeeinfo");

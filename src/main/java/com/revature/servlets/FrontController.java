@@ -11,12 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.model.Employee;
 import com.revature.model.Expense;
 import com.revature.service.EmployeeService;
 import com.revature.service.ExpenseService;
 
 public class FrontController extends HttpServlet {
-	
+
 	private ExpenseService expenseService;
 	private EmployeeService employeeService;
 
@@ -32,11 +33,14 @@ public class FrontController extends HttpServlet {
 		}
 
 		switch (tokens[0]) {
-		case "employeeinfo":
+		case "menu":
 			handleEmployees(req, resp, tokens);
 			break;
 		case "expenses":
 			handleExpenses(req, resp, tokens);
+			break;
+		case: "register":
+			handleEmployees(req, resp, tokens);
 			break;
 		default:
 			resp.sendError(404, "Token not recognized: " + tokens[0]);
@@ -45,11 +49,14 @@ public class FrontController extends HttpServlet {
 		
 	}
 
-	private void handleExpenses(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws ServletException, IOException {
+	
+
+	private void handleExpenses(HttpServletRequest req, HttpServletResponse resp, String[] tokens)
+			throws ServletException, IOException {
 		ObjectMapper objectMap = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
-		
-		switch(req.getMethod()) {
+
+		switch (req.getMethod()) {
 		case "GET":
 			if (tokens.length == 1) {
 				String jsonExpenses = objectMap.writeValueAsString(expenseService.getAllExpenses());
@@ -60,14 +67,15 @@ public class FrontController extends HttpServlet {
 
 			}
 		}
-		
+
 	}
 
-	private void handleEmployees(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws ServletException, IOException {
+	private void handleEmployees(HttpServletRequest req, HttpServletResponse resp, String[] tokens)
+			throws ServletException, IOException {
 		ObjectMapper objectMap = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
-		
-		switch(req.getMethod()) {
+
+		switch (req.getMethod()) {
 		case "GET":
 			if (tokens.length == 1) {
 				String jsonEmployees = objectMap.writeValueAsString(employeeService.getAllEmployees());
@@ -77,7 +85,10 @@ public class FrontController extends HttpServlet {
 				String jsonEmployee = objectMap.writeValueAsString(expenseService.getExpense(empId));
 				pw.write(jsonEmployee);
 			}
+			break;
+		case "POST":
+			
 		}
 	}
-	 
+
 }

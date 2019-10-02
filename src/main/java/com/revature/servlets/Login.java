@@ -22,12 +22,14 @@ public class Login extends HttpServlet {
         String pass = request.getParameter("password");
         System.out.println(username + pass);
         HttpSession mySession = request.getSession();
+        mySession.setAttribute("loggedin", false);
         Employee emp = es.getEmployee(username, pass);
         System.out.println(emp);
         
         
         if(emp != null)
         {
+        	mySession.setAttribute("loggedin", true);
         	mySession.setAttribute("employeeId", emp.getEmployeeId());
             RequestDispatcher rs = request.getRequestDispatcher("menu.html");
             rs.forward(request, response);

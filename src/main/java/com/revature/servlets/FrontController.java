@@ -39,7 +39,7 @@ public class FrontController extends HttpServlet {
 		case "expenses":
 			handleExpenses(req, resp, tokens);
 			break;
-		case: "register":
+		case "register":
 			handleEmployees(req, resp, tokens);
 			break;
 		default:
@@ -53,17 +53,17 @@ public class FrontController extends HttpServlet {
 
 	private void handleExpenses(HttpServletRequest req, HttpServletResponse resp, String[] tokens)
 			throws ServletException, IOException {
-		ObjectMapper objectMap = new ObjectMapper();
+		ObjectMapper om = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
 
 		switch (req.getMethod()) {
 		case "GET":
 			if (tokens.length == 1) {
-				String jsonExpenses = objectMap.writeValueAsString(expenseService.getAllExpenses());
+				String jsonExpenses = om.writeValueAsString(expenseService.getAllExpenses());
 				pw.write(jsonExpenses);
 			} else {
 				int expId = Integer.parseInt(tokens[1]);
-				String jsonExpense = objectMap.writeValueAsString(expenseService.getExpense(expId));
+				String jsonExpense = om.writeValueAsString(expenseService.getExpense(expId));
 
 			}
 		}
@@ -72,22 +72,28 @@ public class FrontController extends HttpServlet {
 
 	private void handleEmployees(HttpServletRequest req, HttpServletResponse resp, String[] tokens)
 			throws ServletException, IOException {
-		ObjectMapper objectMap = new ObjectMapper();
+		ObjectMapper om = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
+		Employee emp = null;
 
 		switch (req.getMethod()) {
 		case "GET":
 			if (tokens.length == 1) {
-				String jsonEmployees = objectMap.writeValueAsString(employeeService.getAllEmployees());
+				String jsonEmployees = om.writeValueAsString(employeeService.getAllEmployees());
 				pw.write(jsonEmployees);
 			} else {
 				int empId = Integer.parseInt(tokens[1]);
-				String jsonEmployee = objectMap.writeValueAsString(expenseService.getExpense(empId));
+				String jsonEmployee = om.writeValueAsString(expenseService.getExpense(empId));
 				pw.write(jsonEmployee);
 			}
 			break;
 		case "POST":
-			
+			emp = om.readValue(req.getReader(), Employee.class);
+			if(!employeeService.createEmployee(emp)) {
+				resp.sendError(400, "Failed to create new employee login");
+			} else {
+				pw.write("Successful creation");
+			}
 		}
 	}
 

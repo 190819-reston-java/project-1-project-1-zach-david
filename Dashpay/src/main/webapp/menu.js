@@ -16,7 +16,7 @@ reimbursementtable.style.display = "none";
 vr.addEventListener("click", (event) => {
     event.stopPropagation();
     reimbursementtable.style.display = olddisplay;
-    
+    event.preventDefault();
     fetch(EXPENSE_URL, { method: "GET" })
         .then((expenseJson)=>{
         clearDisplay();

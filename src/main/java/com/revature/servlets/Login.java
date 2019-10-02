@@ -33,9 +33,15 @@ public class Login extends HttpServlet {
         	mySession.setAttribute("lastName", emp.getEmployeeLastName());
         	mySession.setAttribute("isManager", emp.getManager());
         	mySession.setAttribute("email", emp.getEmail());
+        	if (emp.getManager()) {
+        		response.sendRedirect("managermenu.html");
+        	} else {
+        		response.sendRedirect("menu.html");
+        	}
         	
-            RequestDispatcher rs = request.getRequestDispatcher("menu.html");
-            rs.forward(request, response);
+        	
+//            RequestDispatcher rs = request.getRequestDispatcher("menu.html");
+//            rs.forward(request, response);
         }
         else
         {

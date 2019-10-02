@@ -4,6 +4,8 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.revature.model.Employee;
+import com.revature.service.EmployeeService;
 import com.revature.service.Validate;
 
 import java.sql.*;
@@ -14,13 +16,19 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         //response.setContentType("text/html;charset=UTF-8");
         //PrintWriter out = response.getWriter();
+    	EmployeeService es = new EmployeeService();
         
         String username = request.getParameter("username");
         String pass = request.getParameter("password");
-        System.out.println(username);
+        System.out.println(username + pass);
+        HttpSession mySession = request.getSession();
+        Employee emp = es.getEmployee(username, pass);
+        System.out.println(emp);
         
-        if(Validate.checkUser(username, pass))
+        
+        if(emp != null)
         {
+        	mySession.setAttribute("employeeId", emp.getEmployeeId());
             RequestDispatcher rs = request.getRequestDispatcher("menu.html");
             rs.forward(request, response);
         }

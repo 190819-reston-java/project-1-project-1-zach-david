@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,7 +29,7 @@ public class FrontController extends HttpServlet {
 		String[] tokens = Arrays.copyOfRange(splitUri, 2, splitUri.length);
 		
 		if (tokens.length == 0) {
-			resp.sendError(400, "Usage: /expenses or /employeeinfo");
+			resp.sendError(400, "Usage: /login or /register");
 			return;
 		}
 
@@ -41,6 +42,9 @@ public class FrontController extends HttpServlet {
 			break;
 		case "register":
 			handleEmployees(req, resp, tokens);
+			break;
+		case "addreimbursement":
+			handleExpenses(req, resp, tokens);
 			break;
 		default:
 			resp.sendError(404, "Token not recognized: " + tokens[0]);
@@ -55,6 +59,9 @@ public class FrontController extends HttpServlet {
 			throws ServletException, IOException {
 		ObjectMapper om = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
+		Expense exp = null;
+		HttpSession mySession = req.getSession();
+		
 
 		switch (req.getMethod()) {
 		case "GET":
@@ -64,10 +71,20 @@ public class FrontController extends HttpServlet {
 			} else {
 				int expId = Integer.parseInt(tokens[1]);
 				String jsonExpense = om.writeValueAsString(expenseService.getExpense(expId));
-
 			}
+			break;
+		case "POST":
+			exp = om.readValue(req.getReader(), Expense.class);
+			int empId = (int) mySession.getAttribute("employeeId");
+			exp.setEmployeeId(empId);
+	
+			if (!expenseService.createExpense(exp)) {
+				resp.sendError(400, "Failed to creat Expense");
+			} else {
+				pw.write("Created expense succussfuly");
+			}
+			break;
 		}
-
 	}
 
 	private void handleEmployees(HttpServletRequest req, HttpServletResponse resp, String[] tokens)

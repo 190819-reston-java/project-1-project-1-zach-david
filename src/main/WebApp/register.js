@@ -1,7 +1,7 @@
 'use strict'
 
 const BASE_URL = "/Dashpay";
-const EMPLOYEE_URL = `${BASE_URL}/employee`;
+const EMPLOYEE_URL = `${BASE_URL}/register.html`;
 
 let firstname = document.getElementById("firstname");
 let lastname = document.getElementById("lastname");
@@ -31,13 +31,11 @@ submitbutton.addEventListener("click", (event)=>{
         createEmployee();
     }
 });
-/*
+
 let createEmployee = () => {
-    fetch(EMPLOYEE_URL,
-        method: "POST", body:
-    JSON.strigify(employee)
-        )
+    fetch(EMPLOYEE_URL, method: "POST", body: JSON.stringify(employeeFromForm(createEmployee)) }
+    
+    )
 
 }
 
-*/

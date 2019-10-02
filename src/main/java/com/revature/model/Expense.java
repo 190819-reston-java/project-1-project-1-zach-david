@@ -25,6 +25,11 @@ public class Expense {
 		this.status = status;
 		this.managerId = managerId;
 	}
+	
+	public Expense() {
+		
+	}
+	
 	public int getExpenseId() {
 		return expenseId;
 	}
@@ -73,7 +78,6 @@ public class Expense {
 	public void setManagerId(int managerId) {
 		this.managerId = managerId;
 	}
-	
 	
 
 }

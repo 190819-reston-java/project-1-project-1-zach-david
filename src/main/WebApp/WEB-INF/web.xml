@@ -38,7 +38,22 @@
 
 	<servlet-mapping>
 		<servlet-name>FC</servlet-name>
-		<url-pattern>/s/*</url-pattern>
+		<url-pattern>/menu</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FC</servlet-name>
+		<url-pattern>/expenses</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FC</servlet-name>
+		<url-pattern>/register</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FC</servlet-name>
+		<url-pattern>/addreimbersement</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

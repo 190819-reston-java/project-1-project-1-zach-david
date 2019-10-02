@@ -35,6 +35,10 @@ public class Employee {
 		this.manager = manager;
 	}
 	
+	public Employee() {
+		
+	}
+	
 	
 	public int getEmployeeId() {
 		return employeeId;

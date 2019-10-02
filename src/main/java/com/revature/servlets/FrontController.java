@@ -32,10 +32,10 @@ public class FrontController extends HttpServlet {
 		}
 
 		switch (tokens[0]) {
-		case "menu":
+		case "employeeinfo":
 			handleEmployees(req, resp, tokens);
 			break;
-		case "":
+		case "expenses":
 			handleExpenses(req, resp, tokens);
 			break;
 		default:

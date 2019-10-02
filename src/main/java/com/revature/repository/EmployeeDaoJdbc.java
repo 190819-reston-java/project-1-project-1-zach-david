@@ -21,9 +21,9 @@ public class EmployeeDaoJdbc implements EmployeeDao {
 		
 		try {
 			conn = ConnectionUtil.getConnection();
-			stmt = conn.prepareStatement("SELECT * FROM employee WHERE username=? AND password=?;");
+			stmt = conn.prepareStatement("SELECT * FROM public.employee WHERE username=? AND password=?;");
 			stmt.setString(1, username);
-			stmt.setString(2, password);
+			stmt.setString(2, password);			
 			if(stmt.execute()) {
 				resultSet = stmt.getResultSet();
 				if(resultSet.next()) {

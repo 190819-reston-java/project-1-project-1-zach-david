@@ -12,6 +12,7 @@ public class ConnectionUtil {
 	
 	public static Connection getConnection() {
 		try {
+			Class.forName("org.postgresql.Driver");
 			// We'll write some boilerplate to work with properties
 			Properties props = new Properties();
 			// The following lines just ensure that we find connection.properties
@@ -22,13 +23,14 @@ public class ConnectionUtil {
 			String url = props.getProperty("url");
 			String username = props.getProperty("username");
 			String password = props.getProperty("password");
-			
 			//This is how we actually make connections in jdbc
 			conn = DriverManager.getConnection(url, username, password);
 			
 		}catch (IOException e) {
 			e.printStackTrace();
 		}catch (SQLException e) {
+			e.printStackTrace();
+		}catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		

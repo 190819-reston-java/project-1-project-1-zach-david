@@ -39,7 +39,7 @@ public class FrontController extends HttpServlet {
 		case "expenses":
 			handleExpenses(req, resp, tokens);
 			break;
-		case: "register":
+		case "register":
 			handleEmployees(req, resp, tokens);
 			break;
 		default:

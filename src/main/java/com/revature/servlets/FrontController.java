@@ -2,7 +2,9 @@ package com.revature.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +21,8 @@ import com.revature.service.ExpenseService;
 
 public class FrontController extends HttpServlet {
 
-	private ExpenseService expenseService;
-	private EmployeeService employeeService;
+	private ExpenseService expenseService = new ExpenseService();
+	private EmployeeService employeeService = new EmployeeService();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,13 +39,16 @@ public class FrontController extends HttpServlet {
 		case "menu":
 			handleEmployees(req, resp, tokens);
 			break;
-		case "expenses":
+		case "ViewAllExpensesEmployee":
 			handleExpenses(req, resp, tokens);
 			break;
-		case "register":
+		case "NewEmployee":
 			handleEmployees(req, resp, tokens);
 			break;
-		case "addreimbursement":
+		case "NewExpense":
+			handleExpenses(req, resp, tokens);
+			break;
+		case "ViewExpenses":
 			handleExpenses(req, resp, tokens);
 			break;
 		default:
@@ -61,17 +66,20 @@ public class FrontController extends HttpServlet {
 		PrintWriter pw = resp.getWriter();
 		Expense exp = null;
 		HttpSession mySession = req.getSession();
+		List<Expense> expenseList = new ArrayList<Expense>();
 		
 
 		switch (req.getMethod()) {
 		case "GET":
-			if (tokens.length == 1) {
-				String jsonExpenses = om.writeValueAsString(expenseService.getAllExpenses());
-				pw.write(jsonExpenses);
-			} else {
-				int expId = Integer.parseInt(tokens[1]);
-				String jsonExpense = om.writeValueAsString(expenseService.getExpense(expId));
+			if(tokens[1].equals("All")) {
+				expenseList =  expenseService.getAllExpenses();
+				String test = om.writeValueAsString(expenseList);
+			
+				pw.write(test);
 			}
+			
+			
+			
 			break;
 		case "POST":
 			exp = om.readValue(req.getReader(), Expense.class);

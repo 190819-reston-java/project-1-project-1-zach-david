@@ -1,31 +1,27 @@
-'use strict'
+'use strict';
 
-const BASE_URL = "/Dashpay";
-const EXPENSE_URL = `${BASE_URL}/NewExpense`;
+fetch("http://localhost:8080/DashPay/ViewExpenses/Employee")
+    .then((response)=>{
+        return response.text();
 
-let createExpense = document.getElementById("submit-expense");
-
-createExpense.addEventListener("submit", (event) => {
-    preventDefault();
-    fetch(EXPENSE_URL,  { method: "POST", body: JSON.stringify(expenseFromForm(createExpense)) }
-    )
-    .then((response) => {
-        if(response.status >= 200 && response.status <300) {
-        	
-            alert("Expense Created")
-        } else {
-            alert("Failed to create expense")
-        }
     })
-    .catch(console.error);
-});
+    .then((responsejson)=>{
+        var resp = responsejson;
 
-let expenseFromForm = (form) => {
-    let expense = {};
-    expense.amount = form.amount.value;
-    expense.date = form.requestdate.value;
-    expense.type = form.expensetype.value;
-    expense.status = "pending";
-    expense.description = form.expensedescription.value;
+        console.log(JSON.parse(resp.split("]")[0] + "]"));
+        console.log(JSON.parse(resp.split("]")[1]));
+        
+        var i;
+        for(i=0; i<resp.length; i++) {
 
-}
+            var employeeID = document.createElement("p");
+            employeeID.innerText = resp[i].employeeId;
+            document.querySelector(".employid").appendChild(employeeID);
+
+
+
+
+
+        }
+
+    }).catch(console.log);

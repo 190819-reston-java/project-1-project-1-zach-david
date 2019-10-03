@@ -1,6 +1,7 @@
 'use strict';
-
-
+let viewbutton = document.getElementById("managerview");
+viewbutton.addEventListener("click", (event)=>{
+event.preventDefault();
 fetch("http://localhost:8080/DashPay/ViewExpenses/All")
     .then((response)=>{
         return response.json();
@@ -56,3 +57,5 @@ fetch("http://localhost:8080/DashPay/ViewExpenses/All")
         }
 
     }).catch(console.log);
+
+});

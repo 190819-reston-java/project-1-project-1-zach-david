@@ -1,7 +1,7 @@
 'use strict'
 
 const BASE_URL = "/Dashpay";
-const EXPENSE_URL = `${BASE_URL}/addreimbersement`;
+const EXPENSE_URL = `${BASE_URL}/NewExpense`;
 
 let createExpense = document.getElementById("submit-expense");
 
@@ -14,7 +14,7 @@ createExpense.addEventListener("submit", (event) => {
         	
             alert("Expense Created")
         } else {
-            alert("Failed to creat expense")
+            alert("Failed to create expense")
         }
     })
     .catch(console.error);

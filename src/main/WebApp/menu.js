@@ -1,7 +1,7 @@
 'use strict';
 
 
-fetch("http://localhost:8080/DashPay/ViewExpenses/All")
+fetch("http://localhost:8080/DashPay/ViewExpenses/Employee")
     .then((response)=>{
         return response.json();
 

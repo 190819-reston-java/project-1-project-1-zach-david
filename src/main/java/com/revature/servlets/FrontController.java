@@ -26,17 +26,17 @@ public class FrontController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		String[] splitUri = req.getRequestURI().split("/");
 		String[] tokens = Arrays.copyOfRange(splitUri, 2, splitUri.length);
-		
+
 		if (tokens.length == 0) {
 			resp.sendError(400, "Usage: /login or /register");
 			return;
 		}
 
 		switch (tokens[0]) {
-		case "menu":
+		case "ViewEmployee":
 			handleEmployees(req, resp, tokens);
 			break;
 		case "NewEmployee":
@@ -48,41 +48,47 @@ public class FrontController extends HttpServlet {
 		case "ViewExpenses":
 			handleExpenses(req, resp, tokens);
 			break;
+		case "UpdateExpense":
+			handleExpenses(req, resp, tokens);
+			break;
+		case "UpdateEmployee":
+			handleEmployees(req, resp, tokens);
+			break;
 		default:
 			resp.sendError(404, "Token not recognized: " + tokens[0]);
 			break;
 		}
-		
-	}
 
-	
+	}
 
 	private void handleExpenses(HttpServletRequest req, HttpServletResponse resp, String[] tokens)
 			throws ServletException, IOException {
 		ObjectMapper om = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
+		Employee emp = null;
 		Expense exp = null;
 		HttpSession mySession = req.getSession();
 		List<Expense> expenseList = new ArrayList<Expense>();
-		
 
 		switch (req.getMethod()) {
 		case "GET":
-			if(tokens[1].equals("All")) {
-				expenseList =  expenseService.getAllExpenses();
+			if (tokens[1].equals("All")) {
+				expenseList = expenseService.getAllExpenses();
 				String test = om.writeValueAsString(expenseList);
 				pw.write(test);
-			} else if(tokens[1].equals("Employee")) {
+			} else if (tokens[1].equals("Employee")) {
 				int empId = (int) mySession.getAttribute("employeeId");
+				emp = employeeService.getEmployee(empId);
+				om.updateValue("firstName", emp.getEmployeeFirstName());
 				expenseList = expenseService.getAllEmployeeExpenses(empId);
 				String test = om.writeValueAsString(expenseList);
 				pw.write(test);
-			} else if(tokens[1].equals("Manager")) {
+			} else if (tokens[1].equals("Manager")) {
 				int managerId = Integer.parseInt(req.getParameter("managerId"));
 				expenseList = expenseService.getAllManagerExpenses(managerId);
 				String test = om.writeValueAsString(expenseList);
 				pw.write(test);
-			} else if(tokens[1].equals("Info")) {
+			} else if (tokens[1].equals("Info")) {
 				int expId = Integer.parseInt(req.getParameter("expenseId"));
 				exp = expenseService.getExpense(expId);
 				String test = om.writeValueAsString(exp);
@@ -104,7 +110,7 @@ public class FrontController extends HttpServlet {
 			} else if (req.getParameter("expenseId") != null) {
 				exp = om.readValue(req.getReader(), Expense.class);
 				expenseService.updateExpense(exp);
-			} 
+			}
 			break;
 		}
 	}
@@ -120,7 +126,7 @@ public class FrontController extends HttpServlet {
 		switch (req.getMethod()) {
 		case "GET":
 			if (tokens[1].equals("All")) {
-				employeeList =  employeeService.getAllEmployees();
+				employeeList = employeeService.getAllEmployees();
 				String test = om.writeValueAsString(employeeList);
 				pw.write(test);
 			} else if (tokens[1].contentEquals("MyInfo")) {
@@ -132,8 +138,11 @@ public class FrontController extends HttpServlet {
 			break;
 		case "POST":
 			if (req.getParameter("employeeId") == null) {
+				if (req.getParameter("managerNumber").equals("555")) {
+					emp.setManager(true);
+				}
 				emp = om.readValue(req.getReader(), Employee.class);
-				if(!employeeService.createEmployee(emp)) {
+				if (!employeeService.createEmployee(emp)) {
 					resp.sendError(400, "Failed to create new employee login");
 				} else {
 					pw.write("Successful creation");
@@ -142,7 +151,7 @@ public class FrontController extends HttpServlet {
 				emp = om.readValue(req.getReader(), Employee.class);
 				employeeService.updateEmployee(emp);
 			}
-			
+
 		}
 	}
 

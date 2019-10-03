@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -65,8 +66,8 @@ public class FrontController extends HttpServlet {
 			throws ServletException, IOException {
 		ObjectMapper om = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
-		Employee emp = null;
-		Expense exp = null;
+		Employee emp = new Employee();
+		Expense exp = new Expense();
 		HttpSession mySession = req.getSession();
 		List<Expense> expenseList = new ArrayList<Expense>();
 
@@ -100,17 +101,32 @@ public class FrontController extends HttpServlet {
 			break;
 		case "POST":
 			if (req.getParameter("expenseId") == null) {
-				exp = om.readValue(req.getReader(), Expense.class);
-				int empId = (int) mySession.getAttribute("employeeId");
-				exp.setEmployeeId(empId);
-				if (!expenseService.createExpense(exp)) {
-					resp.sendError(400, "Failed to create Expense");
-				} else {
-					pw.write("Created expense succussfuly");
+				exp.setAmount(Double.parseDouble(req.getParameter("amount")));
+				exp.setRequestDate(req.getParameter("date"));
+				exp.setDescription(req.getParameter("description"));
+				exp.setEmployeeId((int) mySession.getAttribute("employeeId"));
+				exp.setType(Integer.parseInt(req.getParameter("typeId")));
+				exp.setStatus(1);
+				if ((boolean) mySession.getAttribute("isManager")) {
+					resp.sendRedirect("managermenu.html");
+				} else if(!(boolean) mySession.getAttribute("isManager")) {
+					resp.sendRedirect("menu.html");
 				}
+				
 			} else if (req.getParameter("expenseId") != null) {
-				exp = om.readValue(req.getReader(), Expense.class);
+				exp.setAmount(Double.parseDouble(req.getParameter("amount")));
+				exp.setRequestDate(req.getParameter("date"));
+				exp.setDescription(req.getParameter("description"));
+				exp.setEmployeeId((int) mySession.getAttribute("employeeId"));
+				exp.setType(Integer.parseInt(req.getParameter("typeId")));
+				exp.setStatus(Integer.parseInt(req.getParameter("statusId")));
+				exp.setManagerId(Integer.parseInt(req.getParameter("managerId")));
 				expenseService.updateExpense(exp);
+				if ((boolean) mySession.getAttribute("isManager")) {
+					resp.sendRedirect("managermenu.html");
+				} else if(!(boolean) mySession.getAttribute("isManager")) {
+					resp.sendRedirect("menu.html");
+				}
 			}
 			break;
 		}
@@ -121,7 +137,7 @@ public class FrontController extends HttpServlet {
 		HttpSession mySession = req.getSession();
 		ObjectMapper om = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
-		Employee emp = null;
+		Employee emp = new Employee();
 		List<Employee> employeeList = new ArrayList<Employee>();
 
 		switch (req.getMethod()) {
@@ -139,21 +155,49 @@ public class FrontController extends HttpServlet {
 			break;
 		case "POST":
 			if (req.getParameter("employeeId") == null) {
-				if (req.getParameter("managerNumber").equals("555")) {
+				emp.setEmployeeFirstName(req.getParameter("employeeFirstName"));
+				emp.setEmployeeLastName(req.getParameter("employeeLastName"));
+				emp.setEmail(req.getParameter("email"));
+				emp.setUsername(req.getParameter("username"));
+				emp.setPassword(req.getParameter("password"));
+				if (req.getParameter("managerCode").equals("555")) {
 					emp.setManager(true);
 				}
-				emp = om.readValue(req.getReader(), Employee.class);
 				if (!employeeService.createEmployee(emp)) {
 					resp.sendError(400, "Failed to create new employee login");
 				} else {
-					pw.write("Successful creation");
+					emp = employeeService.getEmployee(emp.getUsername(), emp.getPassword());
+					mySession.setAttribute("loggedin", true);
+		        	mySession.setAttribute("employeeId", emp.getEmployeeId());
+		        	mySession.setAttribute("firstName", emp.getEmployeeFirstName());
+		        	mySession.setAttribute("lastName", emp.getEmployeeLastName());
+		        	mySession.setAttribute("isManager", emp.getManager());
+		        	mySession.setAttribute("email", emp.getEmail());
+		        	if(emp.getManager()) {
+		        		resp.sendRedirect("managermenu.html");
+		        	} else {
+		        		resp.sendRedirect("menu.html");
+		        	}
 				}
 			} else if (req.getParameter("employeeId") != null) {
-				emp = om.readValue(req.getReader(), Employee.class);
+				emp.setEmployeeFirstName(req.getParameter("employeeFirstName"));
+				emp.setEmployeeLastName(req.getParameter("employeeLastName"));
+				emp.setEmail(req.getParameter("email"));
+				emp.setUsername(req.getParameter("username"));
+				emp.setPassword(req.getParameter("password"));
 				employeeService.updateEmployee(emp);
+				if (emp.getManager()) {
+					resp.sendRedirect("managermenu.html");
+				} else {
+					resp.sendRedirect("menu.html");
+				}
 			}
-
 		}
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
 	}
 
 }

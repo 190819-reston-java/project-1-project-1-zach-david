@@ -22,7 +22,7 @@
         <div class="gap"></div>
         <div class= "registerform">
             <h1>Expense</h1>
-            <form id="expenseform" method="POST" action="/NewExpense">
+            <form id="expenseform" method="POST" action="NewExpense">
                 <div class="form-group">
                     <label for="requestdate">Request Date</label>
                     <input type="date" class="form-control" id="requestdate" 
@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label for="expensetype">Expense Type:</label>
-                    <Select id="expensetype" class="form-control">
+                    <Select id="expensetype" class="form-control" name="typeId">
                     <option value="1">Travel</option>
                     <option value="2">Medical</option>
                     <option value="3">Business</option>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label for="expensedescription">Expense Description</label>
-                    <textarea id="expensedescription:" name="expensedescription" form="expenseform" class="form-control"></textarea>
+                    <textarea id="expensedescription:" name="description" form="expenseform" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="receipt">Receipt</label>

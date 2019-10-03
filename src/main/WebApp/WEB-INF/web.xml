@@ -38,7 +38,7 @@
 
 	<servlet-mapping>
 		<servlet-name>FC</servlet-name>
-		<url-pattern>/menu/*</url-pattern>
+		<url-pattern>/ViewEmployee/*</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>

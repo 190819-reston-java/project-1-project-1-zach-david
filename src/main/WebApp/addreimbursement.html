@@ -22,15 +22,15 @@
         <div class="gap"></div>
         <div class= "registerform">
             <h1>Expense</h1>
-            <form id="expenseform" method="GET" action="menu.html">
+            <form id="expenseform" method="POST" action="/NewExpense">
                 <div class="form-group">
                     <label for="requestdate">Request Date</label>
                     <input type="date" class="form-control" id="requestdate" 
-                    placeholder="Date of Request">
+                    name = "date" placeholder="Date of Request">
                 </div>
                 <div class="form-group">
                   <label for="amount">Expense Amount</label>
-                  <input type="number" class="form-control" id="amount" placeholder="Enter Expense Amount">
+                  <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter Expense Amount">
                 </div>
                 <div class="form-group">
                     <label for="expensetype">Expense Type:</label>
@@ -43,13 +43,13 @@
                 </div>
                 <div class="form-group">
                     <label for="expensedescription">Expense Description</label>
-                    <textarea id="expensedescription:" form="expenseform" class="form-control"></textarea>
+                    <textarea id="expensedescription:" name="expensedescription" form="expenseform" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="receipt">Receipt</label>
-                    <input type="file" class="form-control">
+                    <input type="file" class="form-control" name="file">
                 </div>
-                <button type="submit" class="btn-info btn-lg btn-block" id="submit-expense">
+                <button type="submit" class="btn-info btn-lg btn-block" id="submit-expense" name="submitexpense">
                     Add Expense
                 </button>
                 <button class="btn-info btn-lg btn-block" 

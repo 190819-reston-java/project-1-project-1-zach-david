@@ -79,10 +79,11 @@ public class FrontController extends HttpServlet {
 			} else if (tokens[1].equals("Employee")) {
 				int empId = (int) mySession.getAttribute("employeeId");
 				emp = employeeService.getEmployee(empId);
-				om.updateValue("firstName", emp.getEmployeeFirstName());
+				String empName = om.writeValueAsString(emp);
 				expenseList = expenseService.getAllEmployeeExpenses(empId);
-				String test = om.writeValueAsString(expenseList);
-				pw.write(test);
+				String empExpenses = om.writeValueAsString(expenseList);
+				pw.write(empExpenses);
+				pw.write(empName);
 			} else if (tokens[1].equals("Manager")) {
 				int managerId = Integer.parseInt(req.getParameter("managerId"));
 				expenseList = expenseService.getAllManagerExpenses(managerId);

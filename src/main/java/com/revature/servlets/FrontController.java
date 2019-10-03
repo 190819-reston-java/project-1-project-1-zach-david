@@ -39,9 +39,6 @@ public class FrontController extends HttpServlet {
 		case "menu":
 			handleEmployees(req, resp, tokens);
 			break;
-		case "ViewAllExpensesEmployee":
-			handleExpenses(req, resp, tokens);
-			break;
 		case "NewEmployee":
 			handleEmployees(req, resp, tokens);
 			break;
@@ -74,51 +71,78 @@ public class FrontController extends HttpServlet {
 			if(tokens[1].equals("All")) {
 				expenseList =  expenseService.getAllExpenses();
 				String test = om.writeValueAsString(expenseList);
-			
 				pw.write(test);
+			} else if(tokens[1].equals("Employee")) {
+				int empId = (int) mySession.getAttribute("employeeId");
+				expenseList = expenseService.getAllEmployeeExpenses(empId);
+				String test = om.writeValueAsString(expenseList);
+				pw.write(test);
+			} else if(tokens[1].equals("Manager")) {
+				int managerId = Integer.parseInt(req.getParameter("managerId"));
+				expenseList = expenseService.getAllManagerExpenses(managerId);
+				String test = om.writeValueAsString(expenseList);
+				pw.write(test);
+			} else if(tokens[1].equals("Info")) {
+				int expId = Integer.parseInt(req.getParameter("expenseId"));
+				exp = expenseService.getExpense(expId);
+				String test = om.writeValueAsString(exp);
+				pw.write(test);
+			} else {
+				pw.write("Token not recognized. Try again.");
 			}
-			
-			
-			
 			break;
 		case "POST":
-			exp = om.readValue(req.getReader(), Expense.class);
-			int empId = (int) mySession.getAttribute("employeeId");
-			exp.setEmployeeId(empId);
-	
-			if (!expenseService.createExpense(exp)) {
-				resp.sendError(400, "Failed to creat Expense");
-			} else {
-				pw.write("Created expense succussfuly");
-			}
+			if (req.getParameter("expenseId") == null) {
+				exp = om.readValue(req.getReader(), Expense.class);
+				int empId = (int) mySession.getAttribute("employeeId");
+				exp.setEmployeeId(empId);
+				if (!expenseService.createExpense(exp)) {
+					resp.sendError(400, "Failed to create Expense");
+				} else {
+					pw.write("Created expense succussfuly");
+				}
+			} else if (req.getParameter("expenseId") != null) {
+				exp = om.readValue(req.getReader(), Expense.class);
+				expenseService.updateExpense(exp);
+			} 
 			break;
 		}
 	}
 
 	private void handleEmployees(HttpServletRequest req, HttpServletResponse resp, String[] tokens)
 			throws ServletException, IOException {
+		HttpSession mySession = req.getSession();
 		ObjectMapper om = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
 		Employee emp = null;
+		List<Employee> employeeList = new ArrayList<Employee>();
 
 		switch (req.getMethod()) {
 		case "GET":
-			if (tokens.length == 1) {
-				String jsonEmployees = om.writeValueAsString(employeeService.getAllEmployees());
-				pw.write(jsonEmployees);
-			} else {
-				int empId = Integer.parseInt(tokens[1]);
-				String jsonEmployee = om.writeValueAsString(expenseService.getExpense(empId));
-				pw.write(jsonEmployee);
+			if (tokens[1].equals("All")) {
+				employeeList =  employeeService.getAllEmployees();
+				String test = om.writeValueAsString(employeeList);
+				pw.write(test);
+			} else if (tokens[1].contentEquals("MyInfo")) {
+				int empId = (int) mySession.getAttribute("employeeId");
+				emp = employeeService.getEmployee(empId);
+				String test = om.writeValueAsString(emp);
+				pw.write(test);
 			}
 			break;
 		case "POST":
-			emp = om.readValue(req.getReader(), Employee.class);
-			if(!employeeService.createEmployee(emp)) {
-				resp.sendError(400, "Failed to create new employee login");
-			} else {
-				pw.write("Successful creation");
+			if (req.getParameter("employeeId") == null) {
+				emp = om.readValue(req.getReader(), Employee.class);
+				if(!employeeService.createEmployee(emp)) {
+					resp.sendError(400, "Failed to create new employee login");
+				} else {
+					pw.write("Successful creation");
+				}
+			} else if (req.getParameter("employeeId") != null) {
+				emp = om.readValue(req.getReader(), Employee.class);
+				employeeService.updateEmployee(emp);
 			}
+			
 		}
 	}
 

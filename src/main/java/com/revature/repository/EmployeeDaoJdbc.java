@@ -121,7 +121,7 @@ public class EmployeeDaoJdbc implements EmployeeDao {
 	public boolean createEmployee(Employee emp) {
 		Connection conn =  null;
 		PreparedStatement stmt = null;
-		String query = "INSERT INTO employee VALUES (DEFAULT, ?, ?, ?, ?, ?, ?;";
+		String query = "INSERT INTO employee VALUES (DEFAULT, ?, ?, ?, ?, ?, ?);";
 		
 		try {
 			conn = ConnectionUtil.getConnection();

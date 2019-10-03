@@ -15,7 +15,6 @@ public class EmployeeService {
 	
 	public Employee getEmployee(String username, String password) {
 		EmployeeDao empDao = new EmployeeDaoJdbc();
-		System.out.println(username + password);
 		return empDao.getEmployee(username, password);
 	}
 	

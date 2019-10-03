@@ -21,22 +21,22 @@
     <div class="back">
         <div class="gap"></div>
         <div class ="registerform">
-            <form>
+            <form method="post" action="/NewEmployee">
                 <div class="form-row">
                     <div class="col-md-6">
                         <label for="firstname">Enter First Name</label>
-                        <input type="text" id="firstname" class="form-control" placeholder="First name">
+                        <input type="text" id="firstname" name="firstname" class="form-control" placeholder="First name">
                     </div>
                     <div class="col-md-6">
                             <label for="lastname">Enter Last Name</label>
-                        <input type="text" id="lastname" class="form-control" placeholder="Last name">
+                        <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last name">
                     </div>
                 </div>
                 <br>
                 <div class="form-row">
                     <div class="col-md-6">
                         <label for="username">Select a User Name</label>
-                        <input type="text" class="form-control" id="username" placeholder="User Name">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="User Name">
                     </div>
                     <div class="col-md-6">
                         <label for="inputPassword1">Select a Password</label>
@@ -48,18 +48,18 @@
                 <div class="form-row">
                     <div class="col-md-4">
                         <label for="useremail">Enter Email</label>
-                        <input type="email" class="form-control" id="useremail" placeholder="Email">
+                        <input type="email" class="form-control" id="useremail" name="email" placeholder="Email">
                     </div>
                     <div class="col-md-4">
                         <label for="employeerole">Employee Type:</label>
-                        <Select id="employeerole" class="form-control">
+                        <Select id="employeerole" name="employeerole" class="form-control">
                         <option>Employee</option>
                         <option>Manager</option>
                         </Select>
                     </div>
                     <div class="col-md-4">
                         <label for="managercode">Enter Manager Code</label>
-                        <input type="text" class="form-control" id="managercode" placeholder="Manager Code">
+                        <input type="text" class="form-control" id="managercode" name="managercode" placeholder="Manager Code">
                     </div>
                 </div>
                 <br>

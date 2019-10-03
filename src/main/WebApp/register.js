@@ -35,7 +35,7 @@ submitbutton.addEventListener("click", (event)=>{
 });
 
 
-let createEmployee = () => {
-    fetch(EMPLOYEE_URL, method: "POST", body: JSON.stringify(employeeFromForm(createEmployee)) }
+//let createEmployee = () => {
+    //fetch(EMPLOYEE_URL, method: "POST", body: JSON.stringify(employeeFromForm(createEmployee)) }
     
  

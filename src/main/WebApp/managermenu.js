@@ -31,7 +31,21 @@ fetch("http://localhost:8080/DashPay/ViewExpenses/All")
             tableDataEmployeeId.innerText = resp[i].employeeId;
 
             var tableDataExpType = document.createElement("td");
-            tableDataExpType.innerText = resp[i].type;
+            var type
+            if (resp[i].type == 1){
+                type = "Travel";
+            }
+            if (resp[i].type == 2){
+                type = "Medical";
+            }
+            if (resp[i].type == 3){
+                type = "Certification";
+            }
+
+            if (resp[i].type == 4){
+                type = "Other";
+            }
+            tableDataExpType.innerText = type;
 
             var tableDataStatus = document.createElement("td");
             var status;
@@ -48,7 +62,13 @@ fetch("http://localhost:8080/DashPay/ViewExpenses/All")
             tableDataStatus.innerText = status;
 
             var tableDataManager = document.createElement("td");
-            tableDataManager.innerText = resp[i].status;
+            if (status == "Pending"){ 
+                tableDataManager.innerText == "---"
+            }
+            else {
+                tableDataManager.innerText = resp[i].managerID;
+            }
+            
             
             tablerow.appendChild(tableDataId);
             tablerow.appendChild(tableDataEmployeeId);

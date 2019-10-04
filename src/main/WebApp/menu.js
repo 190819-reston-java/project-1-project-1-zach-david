@@ -3,14 +3,14 @@
 
 fetch("http://localhost:8080/DashPay/ViewExpenses/Employee")
 .then((response)=>{
-    return response.text();
+    return response.json();
 
 })
 .then((responsejson)=>{
     var resp = responsejson;
-    var fix = JSON.parse(resp.split("]")[1]);
-        var i;
-        for(i=0; i<fix.length; i++) {
+    
+    var i;
+        for(i=0; i<resp.length; i++) {
 
             var tablerow = document.createElement("tr");
 
@@ -30,19 +30,46 @@ fetch("http://localhost:8080/DashPay/ViewExpenses/Employee")
             tableDataEmployeeId.innerText = resp[i].employeeId;
 
             var tableDataExpType = document.createElement("td");
-            tableDataExpType.innerText = resp[i].type;
+            
+            var type;
+            if (resp[i].type == 1){
+                type = "Travel";
+            }
+            if (resp[i].type == 2){
+                type = "Medical";
+            }
+            if (resp[i].type == 3){
+                type = "Certification";
+            }
+
+            if (resp[i].type == 4){
+                type = "Other";
+            }
+            
+            tableDataExpType.innerText = type;
 
             var tableDataStatus = document.createElement("td");
-            tableDataStatus.innerText = resp[i].status;
+            var status;
+            if (resp[i].status == 1){
+                status = "Pending";
+            }
+            if (resp[i].status == 2){
+                status = "Approved";
+            }
+            if (resp[i].status == 3){
+                status = "Rejected";
+            }
+            
+            tableDataStatus.innerText = status;
 
             var tableDataManager = document.createElement("td");
             tableDataManager.innerText = resp[i].status;
             
             tablerow.appendChild(tableDataId);
-            tablerow.appendChild(tableDataEmployeeId);
             tablerow.appendChild(tableDataAmount);
             tablerow.appendChild(tableDataExpType);
-            tablerow.appendChild(tableDataDesc);
+            tablerow.appendChild(tableDataDesc)
+            
             tablerow.appendChild(tableDataReqDate);
             tablerow.appendChild(tableDataStatus);
             tablerow.appendChild(tableDataManager);

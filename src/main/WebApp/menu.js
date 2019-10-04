@@ -47,7 +47,7 @@ fetch("http://localhost:8080/DashPay/ViewExpenses/Employee")
             tablerow.appendChild(tableDataStatus);
             tablerow.appendChild(tableDataManager);
 
-            document.querySelector(".mreimbursementlist").appendChild(tablerow);
+            document.querySelector(".ereimbursementlist").appendChild(tablerow);
 
 
 

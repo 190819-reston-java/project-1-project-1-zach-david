@@ -1,11 +1,5 @@
 'use strict';
 
-let firstname = document.getElementById("firstname");
-let lastname = document.getElementById("lastname");
-let username = document.getElementById("username");
-let password = document.getElementById("password");
-let email = document.getElementById("email");
-
 fetch("http://localhost:8080/DashPay/ViewExpenses/Employee")
 
 .then((response)=>{
@@ -14,11 +8,26 @@ fetch("http://localhost:8080/DashPay/ViewExpenses/Employee")
 })
 .then((responsejson)=>{
     var resp = responsejson;
-    firstname.value = resp.employeeFirstName;
-    lastname.value = resp.employeeLastName;
-    username.value = resp.username;
-    password.value = resp.password;
-    email.value = resp.email;
+
+    var firstname = document.createElement("div")
+    firstname.innerText = resp.employeeFirstName;
+    document.querySelector(".firstname").appendChild(firstname);
+
+    var lastname = document.createElement("div")
+    lastname.innerText = resp.employeeLastName;
+    document.querySelector(".lastname").appendChild(lastname);
+
+    var username = document.createElement("div")
+    username.innerText = resp.employee.username;
+    document.querySelector(".username").appendChild(username);
+
+    var password = document.createElement("div")
+    password.innerText = resp.password;
+    document.querySelector(".password").appendChild(password);
+
+    var email = document.createElement("div")
+    email.innerText = resp.email;
+    document.querySelector(".email").appendChild(email);
       
 
 }).catch(console.log);

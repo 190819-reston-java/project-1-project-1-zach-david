@@ -154,7 +154,7 @@ public class FrontController extends HttpServlet {
 			}
 			break;
 		case "POST":
-			if (req.getParameter("employeeId") == null) {
+			if (mySession.getAttribute("employeeId") == null) {
 				emp.setEmployeeFirstName(req.getParameter("employeeFirstName"));
 				emp.setEmployeeLastName(req.getParameter("employeeLastName"));
 				emp.setEmail(req.getParameter("email"));
@@ -179,12 +179,11 @@ public class FrontController extends HttpServlet {
 		        		resp.sendRedirect("menu.html");
 		        	}
 				}
-			} else if (req.getParameter("employeeId") != null) {
-				emp.setEmployeeFirstName(req.getParameter("employeeFirstName"));
-				emp.setEmployeeLastName(req.getParameter("employeeLastName"));
-				emp.setEmail(req.getParameter("email"));
-				emp.setUsername(req.getParameter("username"));
-				emp.setPassword(req.getParameter("password"));
+			} else if (mySession.getAttribute("employeeId") != null) {
+				emp = om.readValue(req.getReader(), Employee.class);
+				emp.setEmployeeId((int) mySession.getAttribute("employeeId"));
+				
+//				
 				employeeService.updateEmployee(emp);
 				if (emp.getManager()) {
 					resp.sendRedirect("managermenu.html");

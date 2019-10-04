@@ -115,13 +115,14 @@ public class FrontController extends HttpServlet {
 				}
 				
 			} else if (req.getParameter("expenseId") != null) {
-				exp.setAmount(Double.parseDouble(req.getParameter("amount")));
-				exp.setRequestDate(req.getParameter("date"));
-				exp.setDescription(req.getParameter("description"));
-				exp.setEmployeeId((int) mySession.getAttribute("employeeId"));
-				exp.setType(Integer.parseInt(req.getParameter("typeId")));
+//				exp.setAmount(Double.parseDouble(req.getParameter("amount")));
+//				exp.setRequestDate(req.getParameter("date"));
+//				exp.setDescription(req.getParameter("description"));
+//				exp.setEmployeeId((int) mySession.getAttribute("employeeId"));
+//				exp.setType(Integer.parseInt(req.getParameter("typeId")));
 				exp.setStatus(Integer.parseInt(req.getParameter("statusId")));
-				exp.setManagerId(Integer.parseInt(req.getParameter("managerId")));
+				exp.setManagerId((int) mySession.getAttribute("employeeId"));
+				exp.setExpenseId(Integer.parseInt(req.getParameter("expenseId")));
 				expenseService.updateExpense(exp);
 				if ((boolean) mySession.getAttribute("isManager")) {
 					resp.sendRedirect("managermenu.html");

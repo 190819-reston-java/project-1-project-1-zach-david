@@ -177,17 +177,14 @@ public class ExpenseDaoJdbc implements ExpenseDao {
 	public boolean updateExpense(Expense exp) {
 		Connection conn =  null;
 		PreparedStatement stmt = null;
-		String query = "UPDATE expense SET amount=?, description=?, typeid=?, statusid=?, managerid=? WHERE expenseid=?;";
+		String query = "UPDATE expenses SET statusid=?, managerid=? WHERE expenseid=?;";
 		
 		try {
 			conn = ConnectionUtil.getConnection();
 			stmt = conn.prepareStatement(query);
-			stmt.setDouble(1, exp.getAmount());
-			stmt.setString(2, exp.getDescription());
-			stmt.setInt(3, exp.getType());
-			stmt.setInt(4, exp.getStatus());
-			stmt.setInt(5, exp.getManagerId());
-			stmt.setInt(6, exp.getExpenseId());
+			stmt.setInt(1, exp.getStatus());
+			stmt.setInt(2, exp.getManagerId());
+			stmt.setInt(3, exp.getExpenseId());
 			stmt.execute();
 			return true;
 		} catch (SQLException e) {

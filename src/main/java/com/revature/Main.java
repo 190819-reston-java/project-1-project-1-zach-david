@@ -13,9 +13,14 @@ public class Main {
 	public static void main(String[] args) {
 	
 		ExpenseService es = new ExpenseService();
-		List<Expense> expList = new ArrayList();
-		expList = es.getAllExpenses();
-		System.out.println(expList);
+		Expense exp = new Expense();
+		
+		exp.setStatus(2);
+		exp.setManagerId(1);
+		exp.setExpenseId(10);
+		
+		es.updateExpense(exp);
+		
 		
 	}
 

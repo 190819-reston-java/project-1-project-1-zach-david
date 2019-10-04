@@ -23,15 +23,15 @@
                 
                 <H1>Review Reimbursement</H1>
     
-                <form name="expenseID" method="GET" action="Info">
+                <form name="expenseID" method="POST" action="UpdateExpense">
                     <br>
                         <div class="form-group">
                         <label for="expensetype">Enter the ID For The Expense You want to Approve:</label>
-                        <input type="text" name="expenseID" id="employeeinfoform"></input>
+                        <input type="text" name="expenseId" id="employeeinfoform"></input>
                         </div >
                         <div class="form-group">
                                 <label for="expensetype">Expense Status:</label>
-                                <Select id="expensetype" class="form-control" name="approval">
+                                <Select id="expensetype" class="form-control" name="statusId">
                                 <option value="2">Approve</option>
                                 <option value="3">Deny</option>
                                 </Select>

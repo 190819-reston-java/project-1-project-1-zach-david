@@ -63,7 +63,7 @@ fetch("http://localhost:8080/DashPay/ViewExpenses/All")
 
             var tableDataManager = document.createElement("td");
             if (status == "Pending"){ 
-                tableDataManager.innerText == "---"
+                tableDataManager.innerText == "---";
             }
             else {
                 tableDataManager.innerText = resp[i].managerID;

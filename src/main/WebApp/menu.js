@@ -1,6 +1,7 @@
 'use strict';
 
-
+let viewbutton = document.getElementById("viewreimbursement");
+viewbutton.addEventListener("click", (event)=>{
 fetch("http://localhost:8080/DashPay/ViewExpenses/Employee")
 .then((response)=>{
     return response.json();
@@ -83,3 +84,4 @@ fetch("http://localhost:8080/DashPay/ViewExpenses/Employee")
         }
 
     }).catch(console.log);
+});

@@ -12,27 +12,47 @@
 <body>
     <nav class="navbar nav-pills navbar-expand-sm">
         <img src="logo 2.png">
-        <a class="nav-link" href="index.html">Home</a>
-        <a class="nav-link" href="login.html">Login</a>
-        <a class="nav-link" href="register.html">Register</></a>
         <a class="nav-link" href="menu.html">Employee Menu</></a>
         <a class="nav-link" href="managermenu.html">Manager Menu</></a>
+        <a class="nav-link" href="index.html">Logout</a>
     </nav>
     <div class="back">
-        <div class="gap"></div>
+  
+        
         <div class= "registerform">
-            <h1>Expense</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                    </tr>
-
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
+                <Form name="expID" method="GET" action="Info">
+                    <label for="EmployeeInfoForm = "Get Employee"></label>
+                    <input type="Text" name="expenseID" id="employeeinfoform"></input>
+                    <button type="Field">Check Expense</button>
+                </Form>
+            <h1>Approve this Expense?</h1>
+            <form id="expenseform">
+                <div class="form-group">
+                    <label for="requestdate">Request Date</label>
+                    <input type="date" class="form-control" id="requestdate" 
+                    name = "date" placeholder="Date of Request">
+                </div>
+                <div class="form-group">
+                  <label for="amount">Expense Amount</label>
+                  <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter Expense Amount">
+                </div>
+                <div class="form-group">
+                    <label for="expensetype">Expense Type:</label>
+                    <Select id="expensetype" class="form-control" name="typeId">
+                    <option value="1">Travel</option>
+                    <option value="2">Certification</option>
+                    <option value="3">Medical</option>
+                    <option value="4">Other</option>
+                    </Select>
+                </div>
+                <div class="form-group">
+                    <label for="expensedescription">Expense Description</label>
+                    <textarea id="expensedescription:" name="description" form="expenseform" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="receipt">Receipt</label>
+                    <input type="file" class="form-control" name="file">
+                </div>
             <button class="btn-info btn-lg btn-block" 
             onclick="window.location.href = 'managermenu.html';">Approve Expense</button>
             <button class="btn-info btn-lg btn-block" 

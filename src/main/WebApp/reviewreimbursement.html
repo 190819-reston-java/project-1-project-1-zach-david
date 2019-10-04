@@ -17,53 +17,35 @@
         <a class="nav-link" href="index.html">Logout</a>
     </nav>
     <div class="back">
-  
+        <div class="gap"></div>
         
-        <div class= "registerform">
-                <Form name="expenseId" method="GET" action="ViewExpenses/Info">
-                    <label for="EmployeeInfoForm = "Get Employee"></label>
-                    <input type="Text" name="expenseId" id="employeeinfoform"></input>
-                    <button type="Field">Check Expense</button>
-                </Form>
-            <h1>Approve this Expense?</h1>
-            <form id="expenseform">
-                <div class="form-group">
-                    <label for="requestdate">Request Date</label>
-                    <input type="date" class="form-control" id="requestdate" 
-                    name = "date" placeholder="Date of Request">
-                </div>
-                <div class="form-group">
-                  <label for="amount">Expense Amount</label>
-                  <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter Expense Amount">
-                </div>
-                <div class="form-group">
-                    <label for="expensetype">Expense Type:</label>
-                    <Select id="expensetype" class="form-control" name="typeId">
-                    <option value="1">Travel</option>
-                    <option value="2">Certification</option>
-                    <option value="3">Medical</option>
-                    <option value="4">Other</option>
-                    </Select>
-                </div>
-                <div class="form-group">
-                    <label for="expensedescription">Expense Description</label>
-                    <textarea id="expensedescription:" name="description" form="expenseform" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="receipt">Receipt</label>
-                    <input type="file" class="form-control" name="file">
-                </div>
-            <button class="btn-info btn-lg btn-block" 
-            onclick="window.location.href = 'managermenu.html';">Approve Expense</button>
-            <button class="btn-info btn-lg btn-block" 
-            onclick="window.location.href = 'managermenu.html';">Reject Expense</button>   
-            <button class="btn-info btn-lg btn-block" 
-            onclick="window.location.href = 'managermenu.html';">Cancel</button>                
-              
-
+            <div class= "registerform">
+                
+                <H1>Review Reimbursement</H1>
     
-        </div>
+                <form name="expenseID" method="POST" action="UpdateExpense">
+                    <br>
+                        <div class="form-group">
+                        <label for="expensetype">Enter the ID For The Expense You want to Approve:</label>
+                        <input type="text" name="expenseId" id="employeeinfoform"></input>
+                        </div >
+                        <div class="form-group">
+                                <label for="expensetype">Expense Status:</label>
+                                <Select id="expensetype" class="form-control" name="statusId">
+                                <option value="2">Approve</option>
+                                <option value="3">Deny</option>
+                                </Select>
+                        </div>
+                        <button class="btn-info btn-lg btn-block" type="submit">Check Expense</button>
+                </form>
+                <br>
+                <button class="btn-info btn-lg btn-block" 
+                onclick="window.location.href = 'managermenu.html';">Cancel</button> 
+                      
+              
+            </div>
+    
+        
     </div>
-
-</body>
+z</body>
 </html>

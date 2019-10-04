@@ -66,7 +66,7 @@ fetch("http://localhost:8080/DashPay/ViewExpenses/All")
                 tableDataManager.innerText == "---";
             }
             else {
-                tableDataManager.innerText = resp[i].managerID;
+                tableDataManager.innerText = resp[i].managerId;
             }
             
             

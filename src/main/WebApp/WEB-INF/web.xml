@@ -43,6 +43,16 @@
 	
 	<servlet-mapping>
 		<servlet-name>FC</servlet-name>
+		<url-pattern>/UpdateEmployee</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FC</servlet-name>
+		<url-pattern>/UpdateExpense</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>FC</servlet-name>
 		<url-pattern>/NewEmployee</url-pattern>
 	</servlet-mapping>
 	

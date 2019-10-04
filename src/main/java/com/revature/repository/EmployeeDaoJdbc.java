@@ -146,7 +146,7 @@ public class EmployeeDaoJdbc implements EmployeeDao {
 	public boolean updateEmployee(Employee emp) {
 		Connection conn =  null;
 		PreparedStatement stmt = null;
-		String query = "UPDATE employee SET (firstname=?, lastname=?, email=?, username=?, password=?, manager=? WHERE employeeid=?;)";
+		String query = "UPDATE employee SET firstname=?, lastname=?, email=?, username=?, password=?, manager=? WHERE employeeid=?;";
 		
 		try {
 			conn = ConnectionUtil.getConnection();

@@ -74,8 +74,7 @@ public class FrontController extends HttpServlet {
 		switch (req.getMethod()) {
 		case "GET":
 			if (tokens[1].equals("All")) {
-				expenseList = expenseService.getAllExpenses();
-				String test = om.writeValueAsString(expenseList);
+				String test = om.writeValueAsString(expenseService.getAllExpenses());
 				pw.write(test);
 			} else if (tokens[1].equals("Employee")) {
 				int empId = (int) mySession.getAttribute("employeeId");
@@ -101,12 +100,14 @@ public class FrontController extends HttpServlet {
 			break;
 		case "POST":
 			if (req.getParameter("expenseId") == null) {
+				System.out.println("Hi from Create");
 				exp.setAmount(Double.parseDouble(req.getParameter("amount")));
 				exp.setRequestDate(req.getParameter("date"));
 				exp.setDescription(req.getParameter("description"));
 				exp.setEmployeeId((int) mySession.getAttribute("employeeId"));
 				exp.setType(Integer.parseInt(req.getParameter("typeId")));
 				exp.setStatus(1);
+				expenseService.createExpense(exp);
 				if ((boolean) mySession.getAttribute("isManager")) {
 					resp.sendRedirect("managermenu.html");
 				} else if(!(boolean) mySession.getAttribute("isManager")) {
@@ -154,7 +155,7 @@ public class FrontController extends HttpServlet {
 			}
 			break;
 		case "POST":
-			if (req.getParameter("employeeId") == null) {
+			if (mySession.getAttribute("employeeId") == null) {
 				emp.setEmployeeFirstName(req.getParameter("employeeFirstName"));
 				emp.setEmployeeLastName(req.getParameter("employeeLastName"));
 				emp.setEmail(req.getParameter("email"));
@@ -179,12 +180,11 @@ public class FrontController extends HttpServlet {
 		        		resp.sendRedirect("menu.html");
 		        	}
 				}
-			} else if (req.getParameter("employeeId") != null) {
-				emp.setEmployeeFirstName(req.getParameter("employeeFirstName"));
-				emp.setEmployeeLastName(req.getParameter("employeeLastName"));
-				emp.setEmail(req.getParameter("email"));
-				emp.setUsername(req.getParameter("username"));
-				emp.setPassword(req.getParameter("password"));
+			} else if (mySession.getAttribute("employeeId") != null) {
+				emp = om.readValue(req.getReader(), Employee.class);
+				emp.setEmployeeId((int) mySession.getAttribute("employeeId"));
+				
+//				
 				employeeService.updateEmployee(emp);
 				if (emp.getManager()) {
 					resp.sendRedirect("managermenu.html");

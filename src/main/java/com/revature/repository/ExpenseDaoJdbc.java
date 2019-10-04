@@ -177,7 +177,7 @@ public class ExpenseDaoJdbc implements ExpenseDao {
 	public boolean updateExpense(Expense exp) {
 		Connection conn =  null;
 		PreparedStatement stmt = null;
-		String query = "UPDATE expense SET (amount=?, description=?, typeid=?, statusid=?, managerid=? WHERE expenseid=?;";
+		String query = "UPDATE expense SET amount=?, description=?, typeid=?, statusid=?, managerid=? WHERE expenseid=?;";
 		
 		try {
 			conn = ConnectionUtil.getConnection();

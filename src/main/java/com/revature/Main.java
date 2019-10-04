@@ -12,6 +12,11 @@ public class Main {
 
 	public static void main(String[] args) {
 	
+		ExpenseService es = new ExpenseService();
+		List<Expense> expList = new ArrayList();
+		expList = es.getAllExpenses();
+		System.out.println(expList);
+		
 	}
 
 }

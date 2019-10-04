@@ -8,14 +8,13 @@ import com.revature.repository.ExpenseDaoJdbc;
 
 public class ExpenseService {
 	
-	ExpenseDao expDao;
-	
 	public Expense getExpense(int expenseId) {
-		
+		ExpenseDao expDao = new ExpenseDaoJdbc();
 		return expDao.getExpense(expenseId);
 	}
 	
 	public List<Expense> getAllExpenses() {
+		ExpenseDao expDao = new ExpenseDaoJdbc();
 		return expDao.getAllExpenses();
 	}
 	

@@ -11,13 +11,7 @@ import com.revature.service.ExpenseService;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		Employee emp = new Employee();
-		emp.setEmployeeId(6);
-		emp.setEmployeeFirstName("Johnny");
-		EmployeeService es = new EmployeeService();
-		
-		es.updateEmployee(emp);
+	
 	}
 
 }

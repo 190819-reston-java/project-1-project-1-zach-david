@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="main.css" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <title>Reimbursement Menu</title>
+</head>
+<body>
+    <nav class="navbar nav-pills navbar-expand-sm">
+        <img src="logo 2.png">
+        <a class="nav-link" href="menu.html">Employee Menu</></a>
+        <a class="nav-link" href="managermenu.html">Manager Menu</></a>
+        <a class="nav-link" href="index.html">Logout</a>
+    </nav>
+    <div class="back">
+        <div class="gap"></div>
+        <div class= "registerform">
+            <h1>Expense</h1>
+            <form class="expenseform" method="POST" action="/NewExpense">
+                <h1>Reimbusements</h1>
+                <div class="table-responsive">
+                    <table id="managerreimbursement" class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Expense ID</th>
+                                <th scope="col">Submitted by</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Reviewed By</th>
+                            </tr>
+    
+                        </thead>
+                        <tbody class="mreimbursementlist">
+    
+                        </tbody>
+                    </table>
+
+            </form>
+            <button type="submit" class="btn-info btn-lg btn-block" id="submit-expense" name="submitexpense">
+                Approve Expense
+            </button>
+            <button class="btn-info btn-lg btn-block">Reject Expense</button>                
+    
+        </div>
+    </div>
+
+</body>
+</html>

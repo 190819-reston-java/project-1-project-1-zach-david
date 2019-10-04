@@ -1,45 +1,92 @@
-//const REIMBURSEMENT_URL = ""
-// const EMPLOYEE_URL = ``
-let table = document.getElementById("managerreimbursement");
-let srbutton = document.getElementById("managerview");
-let expenselist = document.getElementById("mreimbursementlist");
+'use strict';
+let viewbutton = document.getElementById("managerview");
+viewbutton.addEventListener("click", (event)=>{
+event.preventDefault();
+fetch("http://localhost:8080/DashPay/ViewExpenses/All")
+    .then((response)=>{
+        return response.json();
 
-let olddisplay = table.style.display;
-table.style.display = "none";
+    })
+    .then((responsejson)=>{
+        var resp = responsejson;
+        
+        var i;
+        for(i=0; i<resp.length; i++) {
 
-srbutton.addEventListener("click", (event) => {
-    event.stopPropagation();
-    table.style.display = olddisplay;
-    /*
-    fetch().then().catch();
-    */
-   expenselist.innerHTML = `
-   <tr>
-        <td>
-            <input type = "radio" name="expense"> Expense Id</input>
-        </td>
-        <td>
-            employee id
-        </td>
-        <td>
-            amount
-        </td>
-        <td>
-            type
-        </td>
-        <td>
-            description
-        </td>
-        <td>
-            date
-        </td>
-        <td>
-            status
-        </td>
-        <td>
-            manager name
-        </td>
-   </tr> 
+            var tablerow = document.createElement("tr");
 
-    `;
+            var tableDataId = document.createElement("td");
+            tableDataId.innerText = resp[i].expenseId;
+
+            var tableDataReqDate = document.createElement("td");
+            tableDataReqDate.innerText = resp[i].requestDate;
+
+            var tableDataAmount = document.createElement("td");
+            tableDataAmount.innerText = resp[i].amount;
+
+            var tableDataDesc = document.createElement("td");
+            tableDataDesc.innerText = resp[i].description;
+
+            var tableDataEmployeeId = document.createElement("td");
+            tableDataEmployeeId.innerText = resp[i].employeeId;
+
+            var tableDataExpType = document.createElement("td");
+            var type
+            if (resp[i].type == 1){
+                type = "Travel";
+            }
+            if (resp[i].type == 2){
+                type = "Medical";
+            }
+            if (resp[i].type == 3){
+                type = "Certification";
+            }
+
+            if (resp[i].type == 4){
+                type = "Other";
+            }
+            tableDataExpType.innerText = type;
+
+            var tableDataStatus = document.createElement("td");
+            var status;
+            if (resp[i].status == 1){
+                status = "Pending";
+            }
+            if (resp[i].status == 2){
+                status = "Approved";
+            }
+            if (resp[i].status == 3){
+                status = "Rejected";
+            }
+            
+            tableDataStatus.innerText = status;
+
+            var tableDataManager = document.createElement("td");
+            if (status == "Pending"){ 
+                tableDataManager.innerText == "---";
+            }
+            else {
+                tableDataManager.innerText = resp[i].managerID;
+            }
+            
+            
+            tablerow.appendChild(tableDataId);
+            tablerow.appendChild(tableDataEmployeeId);
+            tablerow.appendChild(tableDataAmount);
+            tablerow.appendChild(tableDataExpType);
+            tablerow.appendChild(tableDataDesc);
+            tablerow.appendChild(tableDataReqDate);
+            tablerow.appendChild(tableDataStatus);
+            tablerow.appendChild(tableDataManager);
+
+            document.querySelector(".mreimbursementlist").appendChild(tablerow);
+
+
+
+
+
+        }
+
+    }).catch(console.log);
+
 });

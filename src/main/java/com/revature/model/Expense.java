@@ -25,6 +25,11 @@ public class Expense {
 		this.status = status;
 		this.managerId = managerId;
 	}
+	
+	public Expense() {
+		
+	}
+	
 	public int getExpenseId() {
 		return expenseId;
 	}
@@ -72,6 +77,13 @@ public class Expense {
 	}
 	public void setManagerId(int managerId) {
 		this.managerId = managerId;
+	}
+
+	@Override
+	public String toString() {
+		return "Expense [expenseId=" + expenseId + ", requestDate=" + requestDate + ", amount=" + amount
+				+ ", description=" + description + ", employeeId=" + employeeId + ", type=" + type + ", status="
+				+ status + ", managerId=" + managerId + "]";
 	}
 	
 	

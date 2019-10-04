@@ -12,32 +12,32 @@
 <body>
     <nav class="navbar nav-pills navbar-expand-sm">
         <img src="logo 2.png">
-        <a class="nav-link" href="index.html">Home</a>
-        <a class="nav-link" href="login.html">Login</a>
-        <a class="nav-link active" href="register.html">Register</></a>
+        <a class="nav-link" href="menu.html">Employee Menu</></a>
+        <a class="nav-link" href="managermenu.html">Manager Menu</></a>
+        <a class="nav-link" href="index.html">Logout</a>
     </nav>
     <div class="back">
         <div class="gap"></div>
         <div class ="registerform">
-            <form method="post" action="NewEmployee">
+            <form method="post" action="UpdateEmployee">
                 <div class="form-row">
                     <div class="col-md-6">
-                        <label for="firstname">Enter First Name</label>
+                        <label class="firstname" for="firstname">Edit First Name</label>
                         <input type="text" id="firstname" name="employeeFirstName" class="form-control" placeholder="First name">
                     </div>
                     <div class="col-md-6">
-                            <label for="lastname">Enter Last Name</label>
+                            <label class="lastname" for="lastname">Edit Last Name</label>
                         <input type="text" id="lastname" name="employeeLastName" class="form-control" placeholder="Last name">
                     </div>
                 </div>
                 <br>
                 <div class="form-row">
                     <div class="col-md-6">
-                        <label for="username">Select a User Name</label>
+                        <label class="username" for="username">Edit User Name</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="User Name">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputPassword1">Select a Password</label>
+                        <label class="password" for="inputPassword1">Edit Password</label>
                         <input type="password" class="form-control" id="inputPassword1" name="password" placeholder="Password">
                     </div>
     
@@ -45,7 +45,7 @@
                 <br>
                 <div class="form-row">
                     <div class="col-md-4">
-                        <label for="useremail">Enter Email</label>
+                        <label class="email" for="useremail">Edit Email</label>
                         <input type="email" class="form-control" id="useremail" name="email" placeholder="Email">
                     </div>
                     <!-- <div class="col-md-4">
@@ -63,14 +63,12 @@
                 <br>
                 <div class="form-row">
                 
-                    <button type="submit" class="btn btn-primary" id="register">Register</button>
+                    <button type="submit" class="btn btn-primary" id="updateEmp">Edit Your Information</button>
                 
                 </div>
-                <br>
-                <p style="text-align: right;">Already a member? <a href="login.html">Sign in</a></p>
             </form>
         </div>
     </div>
-    <!-- <script src="register.js"></script> -->
+    <script src="editemployee.js" type="text/javascript"></script>
 </body>
 </html>

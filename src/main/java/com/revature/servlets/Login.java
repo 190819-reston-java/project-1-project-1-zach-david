@@ -20,17 +20,28 @@ public class Login extends HttpServlet {
         
         String username = request.getParameter("username");
         String pass = request.getParameter("password");
-        System.out.println(username + pass);
         HttpSession mySession = request.getSession();
+        mySession.setAttribute("loggedin", false);
         Employee emp = es.getEmployee(username, pass);
-        System.out.println(emp);
         
         
         if(emp != null)
         {
+        	mySession.setAttribute("loggedin", true);
         	mySession.setAttribute("employeeId", emp.getEmployeeId());
-            RequestDispatcher rs = request.getRequestDispatcher("menu.html");
-            rs.forward(request, response);
+        	mySession.setAttribute("firstName", emp.getEmployeeFirstName());
+        	mySession.setAttribute("lastName", emp.getEmployeeLastName());
+        	mySession.setAttribute("isManager", emp.getManager());
+        	mySession.setAttribute("email", emp.getEmail());
+        	if (emp.getManager()) {
+        		response.sendRedirect("managermenu.html");
+        	} else {
+        		response.sendRedirect("menu.html");
+        	}
+        	
+        	
+//            RequestDispatcher rs = request.getRequestDispatcher("menu.html");
+//            rs.forward(request, response);
         }
         else
         {

@@ -80,7 +80,6 @@ public class FrontController extends HttpServlet {
 			} else if (tokens[1].equals("Employee")) {
 				int empId = (int) mySession.getAttribute("employeeId");
 				emp = employeeService.getEmployee(empId);
-				//String empName = om.writeValueAsString(emp);
 				expenseList = expenseService.getAllEmployeeExpenses(empId);
 				String empExpenses = om.writeValueAsString(expenseList);
 				pw.write(empExpenses);
@@ -182,10 +181,12 @@ public class FrontController extends HttpServlet {
 		        	}
 				}
 			} else if (mySession.getAttribute("employeeId") != null) {
-				emp = om.readValue(req.getReader(), Employee.class);
+				emp.setEmployeeFirstName(req.getParameter("employeeFirstName"));
+				emp.setEmployeeLastName(req.getParameter("employeeLastName"));
+				emp.setEmail(req.getParameter("email"));
+				emp.setUsername(req.getParameter("username"));
+				emp.setPassword(req.getParameter("password"));
 				emp.setEmployeeId((int) mySession.getAttribute("employeeId"));
-				
-//				
 				employeeService.updateEmployee(emp);
 				if (emp.getManager()) {
 					resp.sendRedirect("managermenu.html");

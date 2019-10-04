@@ -74,7 +74,8 @@ public class FrontController extends HttpServlet {
 		switch (req.getMethod()) {
 		case "GET":
 			if (tokens[1].equals("All")) {
-				String test = om.writeValueAsString(expenseService.getAllExpenses());
+				expenseList = expenseService.getAllExpenses();
+				String test = om.writeValueAsString(expenseList);
 				pw.write(test);
 			} else if (tokens[1].equals("Employee")) {
 				int empId = (int) mySession.getAttribute("employeeId");

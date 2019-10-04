@@ -74,8 +74,7 @@ public class FrontController extends HttpServlet {
 		switch (req.getMethod()) {
 		case "GET":
 			if (tokens[1].equals("All")) {
-				expenseList = expenseService.getAllExpenses();
-				String test = om.writeValueAsString(expenseList);
+				String test = om.writeValueAsString(expenseService.getAllExpenses());
 				pw.write(test);
 			} else if (tokens[1].equals("Employee")) {
 				int empId = (int) mySession.getAttribute("employeeId");
@@ -101,12 +100,14 @@ public class FrontController extends HttpServlet {
 			break;
 		case "POST":
 			if (req.getParameter("expenseId") == null) {
+				System.out.println("Hi from Create");
 				exp.setAmount(Double.parseDouble(req.getParameter("amount")));
 				exp.setRequestDate(req.getParameter("date"));
 				exp.setDescription(req.getParameter("description"));
 				exp.setEmployeeId((int) mySession.getAttribute("employeeId"));
 				exp.setType(Integer.parseInt(req.getParameter("typeId")));
 				exp.setStatus(1);
+				expenseService.createExpense(exp);
 				if ((boolean) mySession.getAttribute("isManager")) {
 					resp.sendRedirect("managermenu.html");
 				} else if(!(boolean) mySession.getAttribute("isManager")) {

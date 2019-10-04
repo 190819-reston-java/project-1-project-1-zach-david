@@ -34,7 +34,18 @@ fetch("http://localhost:8080/DashPay/ViewExpenses/All")
             tableDataExpType.innerText = resp[i].type;
 
             var tableDataStatus = document.createElement("td");
-            tableDataStatus.innerText = resp[i].status;
+            var status;
+            if (resp[i].status == 1){
+                status = "Pending";
+            }
+            if (resp[i].status == 2){
+                status = "Approved";
+            }
+            if (resp[i].status == 3){
+                status = "Rejected";
+            }
+            
+            tableDataStatus.innerText = status;
 
             var tableDataManager = document.createElement("td");
             tableDataManager.innerText = resp[i].status;

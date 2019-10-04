@@ -1,15 +1,18 @@
 'use strict';
 
-fetch("http://localhost:8080/DashPay/ViewExpenses/Employee")
+fetch("http://localhost:8080/DashPay/ViewExpenses/Employee/MyInfo")
 
 .then((response)=>{
-    return response.json();
+    return response.text();
 
 })
 .then((responsejson)=>{
     var resp = responsejson;
+    resp.split("]")[0] + "]";
+    console.log(JSON.parse(resp.split("]")[0] + "]"));
+    console.log(JSON.parse(resp.split("]")[1]));
 
-    var firstname = document.createElement("div")
+    var firstname = document.createElement("div");
     firstname.innerText = resp.employeeFirstName;
     document.querySelector(".firstname").appendChild(firstname);
 

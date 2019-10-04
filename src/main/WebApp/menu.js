@@ -2,15 +2,15 @@
 
 
 fetch("http://localhost:8080/DashPay/ViewExpenses/Employee")
-    .then((response)=>{
-        return response.json();
+.then((response)=>{
+    return response.text();
 
-    })
-    .then((responsejson)=>{
-        var resp = responsejson;
-        
+})
+.then((responsejson)=>{
+    var resp = responsejson;
+    var fix = JSON.parse(resp.split("]")[1]);
         var i;
-        for(i=0; i<resp.length; i++) {
+        for(i=0; i<fix.length; i++) {
 
             var tablerow = document.createElement("tr");
 
